@@ -18,6 +18,7 @@ class EditSchoolProfile extends EditTenantProfile
         return $form
             ->schema([
                 TextInput::make('name'),
+                TextInput::make('slug'),
                 // ...
             ]);
     }

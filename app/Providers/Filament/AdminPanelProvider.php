@@ -57,9 +57,15 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->tenant(School::class)
+            ->tenant(
+                model:School::class,
+                ownershipRelationship:'school',
+                slugAttribute: 'slug'
+                
+                )
             ->tenantRegistration(RegisterSchool::class)
-            ->tenantProfile(EditSchoolProfile::class);;
+            ->tenantProfile(EditSchoolProfile::class)
+            ->tenantRoutePrefix('school');
             
     }
 }
