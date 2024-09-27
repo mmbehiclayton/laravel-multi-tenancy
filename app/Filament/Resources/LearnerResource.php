@@ -3,17 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\LearnerResource\Pages;
-use App\Filament\Resources\LearnerResource\RelationManagers;
 use App\Models\Learner;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class LearnerResource extends Resource
 {
@@ -25,7 +25,22 @@ class LearnerResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name'),
+                TextInput::make('name')->required(),
+                Select::make('gender')
+                    ->options([
+                        'male' => 'Male',
+                        'female' => 'Female',
+                    ])
+                    ->required(),
+                TextInput::make('birth_certificate_number')->unique()->required(),
+                DatePicker::make('date_of_birth')->required(),
+                Select::make('status')
+                    ->options([
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
+                        'suspended' => 'Suspended',
+                    ])
+                    ->default('active')->required(),
             ]);
     }
 
@@ -33,7 +48,13 @@ class LearnerResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')->label('Name')->sortable()->searchable(),
+                TextColumn::make('gender')->label('Gender')->sortable(),
+                TextColumn::make('birth_certificate_number')->label('Birth Certificate Number')->sortable(),
+                TextColumn::make('date_of_birth')->label('Date of Birth')->date(),
+                TextColumn::make('status')
+                    ->badge()                    
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -42,9 +63,7 @@ class LearnerResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 

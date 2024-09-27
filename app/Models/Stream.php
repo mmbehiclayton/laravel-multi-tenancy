@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Learner extends Model
+class Stream extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'gender', 'birth_certificate_number', 'date_of_birth', 'status'];
+    protected $fillable = ['name'];
+
 
     public function school(): BelongsTo
     {

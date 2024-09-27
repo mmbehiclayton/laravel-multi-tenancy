@@ -30,6 +30,17 @@ class School extends Model
         return $this->hasMany(Learner::class);
     }
 
+    public function classes(): HasMany
+    {
+        return $this->hasMany(Classes::class);
+    }
+
+    public function streams(): HasMany
+    {
+        return $this->hasMany(Stream::class);
+    }
+
+
     public function roles()
     {
         return $this->hasMany(Role::class); 
