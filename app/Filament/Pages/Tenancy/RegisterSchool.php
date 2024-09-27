@@ -2,6 +2,7 @@
 namespace App\Filament\Pages\Tenancy;
  
 use App\Models\School;
+use App\Models\User;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\Tenancy\RegisterTenant;
@@ -28,7 +29,7 @@ class RegisterSchool extends RegisterTenant
     {
         $school = School::create($data);
 
-        $school->members()->attach(auth()->user()); 
+        $school->users()->attach(auth()->user()); 
  
         return $school;
     }
