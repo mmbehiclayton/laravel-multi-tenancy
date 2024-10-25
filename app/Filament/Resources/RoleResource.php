@@ -21,6 +21,8 @@ class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
 
+    // protected static bool $isScopedToTenant = false;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
 
