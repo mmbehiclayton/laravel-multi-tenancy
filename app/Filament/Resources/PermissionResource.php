@@ -19,6 +19,8 @@ class PermissionResource extends Resource
 {
     protected static ?string $model = CustomPermission::class;
 
+    // protected static bool $isScopedToTenant = false;
+
     protected static ?string $navigationIcon = 'heroicon-o-lock-open';
 
 
